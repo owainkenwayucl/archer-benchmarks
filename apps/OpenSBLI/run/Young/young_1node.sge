@@ -1,0 +1,22 @@
+#!/bin/bash --login
+#
+#$ -S /bin/bash
+#$ -l h_rt=2:0:0
+#$ -N OSBLI_Bench
+#$ -pe mpi 40
+#$ -wd /home/uccaoke/Source/archer-benchmarks/apps/OpenSBLI/source/Benchmark
+
+#$ -l mem=4000M
+
+#$ -t 1-10
+
+#$ -P Free 
+#$ -A Test_allocation
+
+
+module load compilers/intel/2020
+module load mpi/intel/2019/update6/intel
+module load hdf/5-1.8.15-p1-impi/intel-2015-update2
+
+
+gerun ./OpenSBLI_mpi > output_1node_${SGE_TASK_ID}.txt 2> stderr.${SGE_TASK_ID}.txt
